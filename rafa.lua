@@ -32,8 +32,6 @@ local Settings_DisableRendering = true
 local Webhook_Enabled = false
 local Webhook_URL = ""
 local Webhook_Daycare = true
-local Webhook_Huge = true
-
 LocalPlayer.CharacterAdded:Connect(function(char) 
 	Character = char
 	Humanoid = Character:WaitForChild("Humanoid")
