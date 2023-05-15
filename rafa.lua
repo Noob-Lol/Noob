@@ -4,7 +4,7 @@
 -- free
 
 -- Important Variables
-local SCRIPT_NAME = "Rafa PSX GUI"
+local SCRIPT_NAME = "Rafa PSX GUI edited"
 local SCRIPT_VERSION = "v0.4" -- Hey rafa remember to change it before updating lmao
 
 -- Detect if the script has executed by AutoExec
@@ -183,48 +183,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	local IsHardcore = Library.Shared.IsHardcore
-
-	local AllGameWorlds = {}
-	for name, world in pairs(Library.Directory.Worlds) do 
-		if name ~= "WIP" and name ~= "Trading Plaza" and not world.disabled and world.worldOrder and world.worldOrder ~= 0 then
-			world.name = name
-			table.insert(AllGameWorlds, world)
-		end
-	end
-	
-	table.sort(AllGameWorlds, function(a, b) 
-		return a.worldOrder < b.worldOrder
-	end)
-	
-
-	local WorldWithAreas = {}
-	for areaName, area in pairs(Library.Directory.Areas) do 
-		if area and area.world then
-			local world = Library.Directory.Worlds[area.world]
-			local containsSpawn = false
-			
-			if world and world.spawns then
-				for spawnName, spawn in pairs(world.spawns) do 
-					if spawn.settings and spawn.settings.area and spawn.settings.area == name then 
-						containsSpawn = true 
-						break 
-					end
-				end
-			end
-			
-			if containsSpawn then
-				if not WorldWithAreas[area.world] then 
-					WorldWithAreas[area.world] = {}
-				end
-
-				table.insert(WorldWithAreas[area.world], area.name)
-			end
-		end
-	end
-	
-	function GetAllAreasInWorld(world)
-	return WorldWithAreas[world] or {}
-	end
 	
 	--// AUTO COMPLETE game
 	local AllGameAreas = {}
@@ -437,9 +395,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
-	   Name = "Pet Simulator GUI | by Rafa ",
+	   Name = "Psx gui by Rafa,edited by noob ",
 	   LoadingTitle = SCRIPT_NAME .. " " .. SCRIPT_VERSION,
-	   LoadingSubtitle = "by Rafa",
+	   LoadingSubtitle = "by noob",
 	   ConfigurationSaving = {
 		  Enabled = true,
 		  FolderName = "Rafa",
