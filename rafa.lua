@@ -755,34 +755,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			coin:SetAttribute("InstantLand", true)
 		end
 	end)
-
-	local areaToFarmSection = autoFarmTab:CreateSection("Areas to Farm", false, true)
-	for w, world in ipairs(AllGameWorlds) do
-		coroutine.wrap(function()
-			if world and world.name then
-				local containsSpawns = false
-				if world.spawns then
-					for i,v in pairs(world.spawns) do containsSpawns = true break end
-				end
-				
-				if containsSpawns then
-					local worldDropdown = autoFarmTab:CreateDropdown({
-						Name = world.name,
-						MultiSelection = true,
-						CurrentOption = {},
-						Flag = "SelectedAreas_" .. world.name,
-						Icon = Library.Directory.Currency[world.mainCurrency].tinyImage,
-						Options = GetAllAreasInWorld(world),
-						SectionParent = areaToFarmSection,
-						Callback = function(Option)
-							
-						end
-					})
-					worldDropdown:Lock("Coming soon!", true)
-				end
-			end
-		end)()
-	end
 	
 	function GetCoinsInArea(area)
 		local coinsInArea = {}
