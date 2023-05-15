@@ -294,7 +294,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		return false
 	end
 	
-	-- TODO: Implement huge webhook notifier 
+	--Huge webhook?
 	function RewardsRedeemed(rewards)
 
 		for v, rewardBox in pairs(rewards) do 
@@ -306,7 +306,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 					SendWebhook()
 				end
 			end
-			print(quantity, reward)
+			--print(quantity, reward) disabled because too many boosts
 		end
 		
 	end
@@ -574,8 +574,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end
 	end
 	
-
-	
 	for _, focusName in pairs(DefaultFarmFocusList) do 
 		local function UpdateButton(text, interact)
 			if not FarmFocusListButtons[focusName] then return end
@@ -600,8 +598,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 					-- UpdateButton(nil, "Remove")
 				end
 				
-				
-				
 				coroutine.wrap(function() 
 					while true do 
 						wait()
@@ -609,12 +605,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 						break
 					end
 				end)
-				
 				SaveCustomFlag("AutoFarm_FarmFocusList", FarmFocusList)
 			end
 		})
-		
-		-- FarmFocusListButtons[focusName]:Disable("Coming soon")
 	end	
 	
 	
@@ -866,10 +859,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 				coinPriority = priority
 				break
 			elseif priorityName == "Longest" and aMagnitude > bMagnitude then
-				mainCoin.priority = priorityName
-				coinPriority = priority
-				break
-			elseif priorityName == "Easter Coins" and coinIsEaster then
 				mainCoin.priority = priorityName
 				coinPriority = priority
 				break
@@ -1636,8 +1625,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	-- SETTINGS
-	local AUTODAYCARE_OTHER_GAMEMODES = false -- CHANGE THIS TO TRUE IF YOU WANT TO AUTO-COLLECT/ENROLL BOTH NORMAL AND HARDCORE GAMEMODES 
-	local TRY_TO_TELEPORT_SAME_SERVER = true -- If auto-daycare is enabled for both gamemodes, this option will TRY teleport you back to the same server that you were before
+	local AUTODAYCARE_OTHER_GAMEMODES = true
+	local TRY_TO_TELEPORT_SAME_SERVER = true 
 
 
 
