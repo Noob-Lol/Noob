@@ -826,7 +826,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		
 		local coinIsFruit = coin.breakSound == "fruit"
 		local coinIsDiamond = coin.currencyType == "Diamonds"
-		local coinIsEaster = coin.currencyType == "Easter Coins"
 		
 		local coinHighestMultiplier = CalcMultiplier(mainCoin.b) > CalcMultiplier(coinToCompare.b)
 		
@@ -1625,7 +1624,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	-- SETTINGS
-	local AUTODAYCARE_OTHER_GAMEMODES = true
+	local AUTODAYCARE_OTHER_GAMEMODES = false
 	local TRY_TO_TELEPORT_SAME_SERVER = true 
 
 
