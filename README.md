@@ -1,9 +1,7 @@
 # Noob
 idk
 
-psx script by rafa copied
-
-isnt working because i deleted too much
+psx script by rafa edited
 
 https://raw.githubusercontent.com/Rafacasari/roblox-scripts/main/psx.lua original
 
