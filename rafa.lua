@@ -1,5 +1,9 @@
---real by Rafa, edit by me
+-- THIS SCRIPT HAS BEEN CODED BY RAFA (discord.gg/MilkUp)
+-- DON'T BE A STUPID SKIDDIE THAT STEAL PEOPLE CODE AND PUT ON A SHIT PAID (or "watch ad to get key") SCRIPT
+-- discord.gg/MilkUp
+-- free
 
+-- Important Variables
 local SCRIPT_NAME = "Rafa PSX GUI"
 local SCRIPT_VERSION = "v0.4" -- Hey rafa remember to change it before updating lmao
 
@@ -32,6 +36,8 @@ local Settings_DisableRendering = true
 local Webhook_Enabled = false
 local Webhook_URL = ""
 local Webhook_Daycare = true
+local Webhook_Huge = true
+
 LocalPlayer.CharacterAdded:Connect(function(char) 
 	Character = char
 	Humanoid = Character:WaitForChild("Humanoid")
@@ -88,10 +94,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 			LocalPlayer:Kick("Network Invoke/Fire was not found! Failed to bypass!")
 		end
 		
-		hookfunction(debug.getupvalue(Library.Network.Invoke, 1), function(...) return true end)
-		-- Currently we don't need to hook Fire, since both Invoke/Fire have the same upvalue, this may change in future.
-		-- hookfunction(debug.getupvalue(Library.Network.Fire, 1), function(...) return true end)
-		
+		hookfunction(debug.getupvalue(Library.Network.Invoke, 1), function(...) return true end)		
 		local originalPlay = Library.Audio.Play
 		Library.Audio.Play = function(...) 
 			if checkcaller() then
@@ -173,11 +176,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	LocalPlayer.PlayerScripts:WaitForChild("Scripts", 10):WaitForChild("Game", 10):WaitForChild("Coins", 10)
 	LocalPlayer.PlayerScripts:WaitForChild("Scripts", 10):WaitForChild("Game", 10):WaitForChild("Pets", 10)
 	wait()
-	-- local orbsScript = getsenv(game.Players.LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Orbs", 10))
-	-- local CollectOrb = orbsScript.Collect
 	
 	local GetRemoteFunction = debug.getupvalue(Library.Network.Invoke, 2)
-		-- OrbList = debug.getupvalue(orbsScript.Collect, 1)
 	local CoinsTable = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Coins", 10)).DestroyAllCoins, 1)
 	local RenderedPets = debug.getupvalue(getsenv(LocalPlayer.PlayerScripts.Scripts.Game:WaitForChild("Pets", 10)).NetworkUpdate, 1)
 	
@@ -222,32 +222,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end
 	end
 	
-
 	function GetAllAreasInWorld(world)
-		-- local AllAreasInSelectedWorld = {}
-
-		-- for name, area in pairs(Library.Directory.Areas) do
-			-- local containsSpawn = false
-			-- for spawnName, spawn in pairs(world.spawns) do 
-				-- if spawn.settings and spawn.settings.area and spawn.settings.area == name then 
-					-- containsSpawn = true 
-					-- break 
-				-- end
-			-- end
-			
-			-- if area.world == world.name and containsSpawn then
-				-- table.insert(AllAreasInSelectedWorld, name)
-			-- end
-		-- end
-
-		-- table.sort(AllAreasInSelectedWorld, function(a, b)
-			-- local areaA = Library.Directory.Areas[a]
-			-- local areaB = Library.Directory.Areas[b]
-			-- return areaA.id < areaB.id
-		-- end)
-
-		-- return AllAreasInSelectedWorld 
-		return WorldWithAreas[world] or {}
+	return WorldWithAreas[world] or {}
 	end
 	
 	--// AUTO COMPLETE game
@@ -359,10 +335,34 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		
 		return false
 	end
+	
+	-- TODO: Implement huge webhook notifier 
+	function RewardsRedeemed(rewards)
+
+		for v, rewardBox in pairs(rewards) do 
+			local reward, quantity = unpack(rewardBox)
+			if Webhook_Huge and reward == "Huge Pet" then 
+				local petId = quantity
+				local petData = Library.Directory.Pets[petId]
+				if petData then
+					SendWebhook()
+				end
+			end
+			print(quantity, reward)
+		end
+		
+	end
+	
+	Library.Network.Fired("Rewards Redeemed"):Connect(function(rewards)
+		RewardsRedeemed(rewards)
+	end)
+	
+	Library.Signal.Fired("Rewards Redeemed"):Connect(function(rewards)
+		RewardsRedeemed(rewards)
+	end)
 
 	local GetCoinsInstance = GetRemoteFunction("Get Coins")
 	local OpenEggInstance = GetRemoteFunction("Buy Egg")
-	-- print(OpenEggInstance, typeof(OpenEggInstance))
 	local metatable = getrawmetatable(game)
 	setreadonly(metatable, false)
 	local oldNamecall = metatable.__namecall
@@ -400,7 +400,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end
 	
 	setreadonly(metatable, true)
-
+	
 	local fastPets = false
 	local Original_HasPower = Library.Shared.HasPower
 	Library.Shared.HasPower = function(pet, powerName) 
@@ -437,9 +437,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
-	   Name = "Pet Simulator X edit by Noob ",
+	   Name = "Pet Simulator GUI | by Rafa ",
 	   LoadingTitle = SCRIPT_NAME .. " " .. SCRIPT_VERSION,
-	   LoadingSubtitle = "by Noob",
+	   LoadingSubtitle = "by Rafa",
 	   ConfigurationSaving = {
 		  Enabled = true,
 		  FolderName = "Rafa",
@@ -471,7 +471,6 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	end)()
 	
-	
 	function AddCustomFlag(flagName, defaultValue, callback)
 		if Rayfield and Rayfield.Flags and not Rayfield.Flags[flagName] then
 			local newFlag = {
@@ -500,22 +499,9 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		end
 	end
 	
-	
-	
 	Library.ChatMsg.New(string.format("Hello, %s! You're running %s %s", LocalPlayer.DisplayName, SCRIPT_NAME, SCRIPT_VERSION), Color3.fromRGB(175, 70, 245))
 	
-	--local mainTab = Window:CreateTab("Main", "12434808810")
-	
-	
-	-- task.spawn(function() 
-		-- while true do 
-			-- stats:Set({Title = "Hello, " .. LocalPlayer.DisplayName, Content = string.format("There are some useful information:\nServer age: %s\n", Library.Functions.TimeString(workspace.DistributedGameTime, true))})
-			-- task.wait(1)
-		-- end
-	-- end)
-	
 	LocalPlayer.PlayerScripts:WaitForChild("Scripts", 10):WaitForChild("Game", 10)
-	
 	
 	local autoFarmTab = Window:CreateTab("Farm", "13075651575", true)
 	local stats = autoFarmTab:CreateParagraph({Title = "Hello, <b><font color=\"#2B699F\">" .. LocalPlayer.DisplayName .. "</font></b>!", Content = "Thanks for using my script! - Rafa\nMake sure to join us at <b><font color=\"#2B699F\">discord.gg/MilkUp</font></b>"})
@@ -1124,7 +1110,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 
 		return Library.Network.Invoke("Buy Egg", eggId, tripleHatch, octupleHatch)
 	end
-da
+	
 	local eggTab = Window:CreateTab("Eggs", "13075637275", true)
 	local hatchingSection = eggTab:CreateSection("Egg Hatching", false)
 	local eggInfo = eggTab:CreateParagraph({Title = "Information", Content = "Buy some egg in-game and it will be automatically selected!\nSelected Egg: %s\nMode: %s\nQuantity Hatched: %s\nQuantity Remaining: %s\n25x Insane Luck: %s\n\n\n\naaa"}, hatchingSection)
@@ -1719,9 +1705,10 @@ da
 	})
 	
 	
-	
-	local AUTODAYCARE_OTHER_GAMEMODES = true
-	local TRY_TO_TELEPORT_SAME_SERVER = true
+	-- SETTINGS
+	local AUTODAYCARE_OTHER_GAMEMODES = false -- CHANGE THIS TO TRUE IF YOU WANT TO AUTO-COLLECT/ENROLL BOTH NORMAL AND HARDCORE GAMEMODES 
+	local TRY_TO_TELEPORT_SAME_SERVER = true -- If auto-daycare is enabled for both gamemodes, this option will TRY teleport you back to the same server that you were before
+
 
 
 	local DAYCARE_WORLD = "Spawn"
@@ -2331,3 +2318,5 @@ da
 		end
 	end)
 end
+
+-- discord.gg/MilkUp
