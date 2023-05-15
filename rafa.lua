@@ -45,36 +45,9 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 7722306047 or game.PlaceId == 12610002282 then
-	
-	local banSuccess, banError = pcall(function() 
-		local Blunder = require(game:GetService("ReplicatedStorage"):WaitForChild("X", 10):WaitForChild("Blunder", 10):WaitForChild("BlunderList", 10))
-		if not Blunder or not Blunder.getAndClear then LocalPlayer:Kick("Error while bypassing the anti-cheat! (Didn't find blunder)") end
-		
-		local OldGet = Blunder.getAndClear
-		setreadonly(Blunder, false)
-		local function OutputData(Message)
-		   print("-- PET SIM X BLUNDER --")
-		   print(Message .. "\n")
-		end
-		
-		Blunder.getAndClear = function(...)
-		   local Packet = ...
-			for i,v in next, Packet.list do
-			   if v.message ~= "PING" then
-				   OutputData(v.message)
-				   table.remove(Packet.list, i)
-			   end
-		   end
-		   return OldGet(Packet)
-		end
-		
-		setreadonly(Blunder, true)
-	end)
 
-	if not banSuccess then
-		LocalPlayer:Kick("Error while bypassing the anti-cheat! (".. banError ..")")
-		return
-	end
+	
+	
 	
 	local Library = require(game:GetService("ReplicatedStorage").Library)
 	assert(Library, "Oopps! Library has not been loaded. Maybe try re-joining?") 
