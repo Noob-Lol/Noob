@@ -43,7 +43,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	Humanoid = Character:WaitForChild("Humanoid")
 	HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 end)
-
+print("Hi")
 if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 7722306047 or game.PlaceId == 12610002282 then
 	
 	local banSuccess, banError = pcall(function() 
@@ -53,7 +53,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		local OldGet = Blunder.getAndClear
 		setreadonly(Blunder, false)
 		local function OutputData(Message)
-		   print(Message .. "\n")
+			print("Blunder lol fix script")
+			print(Message .. "\n")
 		end
 		
 		Blunder.getAndClear = function(...)
@@ -66,6 +67,8 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 		   end
 		   return OldGet(Packet)
 		end
+		
+		setreadonly(Blunder, true)
 	end)
 
 	if not banSuccess then
@@ -392,7 +395,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 
 	local Window = Rayfield:CreateWindow({
-	   Name = "PSX GUI by Rafa | edited by noob",
+	   Name = "PSX GUI by Rafa | edited by noob ",
 	   LoadingTitle = SCRIPT_NAME .. " " .. SCRIPT_VERSION,
 	   LoadingSubtitle = "noob edit",
 	   ConfigurationSaving = {
