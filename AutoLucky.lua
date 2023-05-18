@@ -13,9 +13,9 @@ end)
 local memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
 while true do
 	memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
-	if memory >= 3000 then break --rejoin oh high memory
+	if memory >= 3100 then break --rejoin oh high memory
 	else
-	wait(5)
+	wait(20)
 	end
 end 
 game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
