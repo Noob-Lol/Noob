@@ -8,6 +8,7 @@ if Current world == "Lucky Block World" then
 	pos.CFrame = CFrame.new(-72,130,1366) 
 else
 	print("wrong world")
+	end
 game.NetworkClient.ChildRemoved:Connect(function() --reconect if disconnected
    game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
 end)
