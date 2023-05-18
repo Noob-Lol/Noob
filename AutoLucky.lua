@@ -1,6 +1,7 @@
 --put in autoexec folder
 --tp in lucky world for double egg farm
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Noob-Lol/Noob/main/rafa.lua"))()
+task.wait(1)
 CurrentWorld = save.World
 if Current world == "Lucky Block World" then
 	local pos = game.Players.LocalPlayer.Character.HumanoidRootPart
