@@ -3,6 +3,9 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Noob-Lol/Noob/main/rafa.lua"))()
 local pos = game.Players.LocalPlayer.Character.HumanoidRootPart
 pos.CFrame = CFrame.new(-72,130,1366) 
+local c =game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Chat"):FindFirstChildWhichIsA("Frame");c.Active = true;c.Draggable=false
+local ChatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
+ChatSettings.WindowResizable = true --chat resize
 game.NetworkClient.ChildRemoved:Connect(function() --reconect if disconnected
    game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
 end)
