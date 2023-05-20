@@ -43,7 +43,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	Humanoid = Character:WaitForChild("Humanoid")
 	HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 end)
-print("Hi")
+print("Hi,lol")
 if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 7722306047 or game.PlaceId == 12610002282 then
 	
 	local banSuccess, banError = pcall(function() 
@@ -1621,7 +1621,7 @@ if game.PlaceId == 6284583030 or game.PlaceId == 10321372166 or game.PlaceId == 
 	
 	
 	-- SETTINGS
-	local AUTODAYCARE_OTHER_GAMEMODES = false
+	local AUTODAYCARE_OTHER_GAMEMODES = true --hardcore
 	local TRY_TO_TELEPORT_SAME_SERVER = true 
 
 
