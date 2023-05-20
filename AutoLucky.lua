@@ -26,5 +26,5 @@ coroutine.wrap(function()
 		memory = nil
 		wait(20)
 		end
-	end)
+	end)()
 
