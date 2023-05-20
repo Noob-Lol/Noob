@@ -17,14 +17,16 @@ game.NetworkClient.ChildRemoved:Connect(function() --reconect if disconnected
 	game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 local memory = nil
-coroutine.wrap(function() 
+function MemoryCheck()
 	while true do
-		memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
-		if memory >= 3200 then --rejoin oh high memory
-		game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-		else
-		memory = nil
-		wait(20)
-		end
-	end)()
-
+	memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
+	if memory >= 3200 then --rejoin oh high memory
+	game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+	else
+	memory = nil
+	wait(20)
+	end
+    end
+end
+local Check = coroutine.wrap(MemoryCheck)
+Check()
