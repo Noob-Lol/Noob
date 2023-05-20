@@ -7,13 +7,14 @@ local c =game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitFo
 local ChatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
 ChatSettings.WindowResizable = true --chat resize
 game.NetworkClient.ChildRemoved:Connect(function() --reconect if disconnected
-   game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+   game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
-local memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
+local memory = nil
 while true do
 	memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
 	if memory >= 3100 then break --rejoin oh high memory
 	else
+	memory = nil
 	wait(20)
 	end
 end 
