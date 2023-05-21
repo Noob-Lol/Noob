@@ -20,7 +20,7 @@ local memory = nil
 function MemoryCheck()
 	while true do
 	memory = game:GetService("Stats"):GetTotalMemoryUsageMb()
-	if memory >= 3200 then --rejoin oh high memory
+	if memory >= 3150 then --rejoin oh high memory
 	game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 	else
 	memory = nil
